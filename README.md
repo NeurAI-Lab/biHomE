@@ -33,13 +33,13 @@ ln -s /data/input/datasets/ImageRegistration/coco data/coco/dataset
 #### Training
 
 ```
-python3 train.py --config_file config/coco/detone-bihome-lr-5e-3.yaml
+python3 train.py --config_file config/pds-coco/zeng-bihome-lr-1e-3.yaml
 ```
 
 #### Testing
 
 ```
-python3 eval.py --config_file config/coco/detone-bihome-lr-5e-3.yaml --ckpt log/zeng-bihome-pdscoco-lr-1e-3/model_90000.pth
+python3 eval.py --config_file config/pds-coco/zeng-bihome-lr-1e-3.yaml --ckpt log/zeng-bihome-pdscoco-lr-1e-3/model_90000.pth
 ```
 
 #### Cite our work:
