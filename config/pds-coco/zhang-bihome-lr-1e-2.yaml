@@ -1,0 +1,125 @@
+MODEL:
+
+  BACKBONE:
+
+    NAME: 'ContentAware'
+
+    VARIANT: 'DoubleLine'
+
+    IMAGE_SIZE: 128
+
+    PRETRAINED_RESNET: True
+
+    IMAGE_KEY: ['image']
+
+    PATCH_KEYS: ['patch_1', 'patch_2']
+
+    MASK_KEYS: ['mask_1', 'mask_2']
+
+    FIX_MASK: True
+
+    FEATURE_KEYS: ['feature_1', 'feature_2']
+
+    TARGET_KEYS: ['delta_hat_12', 'delta_hat_21']
+
+  HEAD:
+
+    NAME: 'PerceptualHead'
+
+    PATCH_SIZE: 128
+    PATCH_KEYS: ['patch_1', 'patch_2']
+
+    # Homography is directly regressed by backbone
+    DELTA_HAT_KEYS: ['delta_hat_12', 'delta_hat_21']
+    PF_KEYS: []
+
+    # DSAC not required
+    RANSAC_HYPOTHESIS_NO: -1
+    POINTS_PER_HYPOTHESIS: -1
+
+    # Possible values: resnet18, resnet34, resnet50, resnet101, resnet152, resnext50_32x4d, resnext101_32x8d
+    AUXILIARY_RESNET: 'resnet34'
+    AUXILIARY_RESNET_OUTPUT_LAYER: 1
+
+    # Triplet loss
+    TRIPLET_LOSS: 'double-line'
+    TRIPLET_AGGREGATION: 'channel-agnostic'
+    TRIPLET_MARGIN: 'inf'
+    TRIPLET_DISTANCE: 'l1'
+    TRIPLET_MU: 0.01
+    MASK_KEYS: []
+    SAMPLING_STRATEGY: 'downsample-mask'
+
+DATA:
+
+  # Name of used dataset
+  NAME: 'coco'
+
+  # Dataset and camera models root
+  DATASET_ROOT: 'data/coco/dataset'
+
+  # Train/test split csv files
+  TEST_SPLIT: 'data/coco/dataset/val2014'
+  TRAIN_SPLIT: 'data/coco/dataset/train2014'
+
+  # Data transforms & args
+  TRANSFORMS: [HomographyNetPrep: [32, 128, ['image_1', 'image_2'], 32, '4_points'],
+               DictToGrayscale: [['patch_1', 'patch_2']],
+               DictStandardize: [[0.443], [0.129], ['patch_1', 'patch_2']],
+               DictToTensor: [['patch_1', 'patch_2']]]
+
+  TEST_TRANSFORM: [HomographyNetPrep: [32, 128, ['image_1', 'image_2'], 32, '4_points'],
+                   DictToGrayscale: [['patch_1', 'patch_2']],
+                   DictStandardize: [[0.443], [0.129], ['patch_1', 'patch_2']],
+                   DictToTensor: [['patch_1', 'patch_2']]]
+
+
+  # Num workers
+  NUM_WORKERS: 8
+
+  # SAMPLER PART
+  SAMPLER:
+
+    # Number of images in the batch
+    BATCH_SIZE: 64
+
+    # How many images we would call one epoch
+    TRAIN_SAMPLES_PER_EPOCH: 230400  # 3600 steps for batch_size=64
+
+    # How many images we would call one epoch
+    TEST_SAMPLES_PER_EPOCH: 2304  # 36 steps for batch_size=64
+
+    # Test seed to make the test more comparable
+    TRAIN_SEED: 42
+
+    # Test seed to make the test more comparable
+    TEST_SEED: 42
+
+SOLVER:
+
+  DEVICE: 'cuda'
+
+  OPTIMIZER: 'Adam'
+  MOMENTUM_1: 0.9
+  MOMENTUM_2: 0.999
+
+  # This lr worked best for us
+  LR: 0.01
+
+  # Equal to 90k steps (LR dropped every 30k steps)
+  NUM_EPOCHS: 25
+  
+  # Milestones are taken from DeTone paper
+  # Learning should be done for 90k iterations, which is 5.7M images
+  MILESTONES: [30000, 60000, 90000]
+  LR_DECAY: 0.1
+
+  # Original setting from the DeTone paper
+  LOSS: 'biHomE'
+
+LOGGING:
+
+  DIR: 'log/zhang-bihome-pdscoco-lr-1e-2'
+  STEP: 100
+  VERBOSE: False
+

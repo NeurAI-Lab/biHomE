@@ -1,0 +1,12 @@
+kornia==0.5.0
+torch
+torchvision
+tqdm
+numpy
+matplotlib
+opencv_python
+colour-demosaicing
+tensorboard
+gpustat
+# porespy
+pyyaml
