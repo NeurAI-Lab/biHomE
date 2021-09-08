@@ -1,7 +1,7 @@
 # Perceptual Loss for Robust Unsupervised Homography Estimation
 
 
-This is the official code for the CVPR'21 IMW Paper "[Perceptual Loss for Robust Unsupervised Homography Estimation](https://openaccess.thecvf.com/content/CVPR2021W/IMW/html/Koguciuk_Perceptual_Loss_for_Robust_Unsupervised_Homography_Estimation_CVPRW_2021_paper.html)" by [Daniel Koguciuk](https://linkedin.com/in/danielkoguciuk), [Elahe Arani](https://www.researchgate.net/profile/Elahe-Arani), and [Bahram Zonooz](https://scholar.google.com/citations?hl=en&user=FZmIlY8AAAAJ).
+This is the official code for the CVPR'21 IMW Paper "[Perceptual Loss for Robust Unsupervised Homography Estimation](https://openaccess.thecvf.com/content/CVPR2021W/IMW/html/Koguciuk_Perceptual_Loss_for_Robust_Unsupervised_Homography_Estimation_CVPRW_2021_paper.html)" by [Daniel Koguciuk](https://linkedin.com/in/danielkoguciuk), [Elahe Arani](https://www.linkedin.com/in/elahe-arani-630870b2/), and [Bahram Zonooz](https://scholar.google.com/citations?hl=en&user=FZmIlY8AAAAJ).
 
 #### Abstract
 
