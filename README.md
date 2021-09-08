@@ -9,7 +9,7 @@ Homography estimation is often an indispensable step in many computer vision tas
 
 ![alt text](fig/teaser.png)
 
-For details, please see the [Paper](https://openaccess.thecvf.com/content/CVPR2021W/IMW/html/Koguciuk_Perceptual_Loss_for_Robust_Unsupervised_Homography_Estimation_CVPRW_2021_paper.html) and [Presentation](https://www.youtube.com/watch?v=Yt1J6B0hcfc)
+For details, please see the [Paper](https://openaccess.thecvf.com/content/CVPR2021W/IMW/html/Koguciuk_Perceptual_Loss_for_Robust_Unsupervised_Homography_Estimation_CVPRW_2021_paper.html) and [Presentation](https://www.youtube.com/watch?v=X6aRM2ctxXI&ab_channel=NeurAI)
 
 #### Environment setup
 
