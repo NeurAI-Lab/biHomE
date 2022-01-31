@@ -18,11 +18,10 @@ MODEL:
 
   HEAD:
 
-    NAME: 'NoOpHead'
+    NAME: 'PhotometricHead'
 
-    TARGET_GEN: '4_points'
-
-    LEARNING_KEYS: ['delta', 'delta_hat_12', 'delta', 'delta_hat_12']
+    # ground_truth, original_non_patched_image, delta_gt, delta_hat
+    LEARNING_KEYS: ['patch_2', 'image_1', 'delta', 'delta_hat_12']
 
 DATA:
 
@@ -37,15 +36,15 @@ DATA:
   TRAIN_SPLIT: 'data/coco/dataset/train2014'
 
   # Data transforms & args
-  TRANSFORMS: [HomographyNetPrep: [32, 128, ['image_1', 'image_2'], 0, 'all_points'],
-               DictToGrayscale: [['patch_1', 'patch_2']],
-               DictStandardize: [[0.443], [0.129], ['patch_1', 'patch_2']],
-               DictToTensor: [['patch_1', 'patch_2', 'target']]]
+  TRANSFORMS: [HomographyNetPrep: [32, 128, ['image_1', 'image_2'], 0, '4_points'],
+               DictToGrayscale: [['patch_1', 'patch_2', 'image_1']],
+               DictStandardize: [[0.443], [0.129], ['patch_1', 'patch_2', 'image_1']],
+               DictToTensor: [['patch_1', 'patch_2', 'image_1']]]
 
-  TEST_TRANSFORM: [HomographyNetPrep: [32, 128, ['image_1', 'image_2'], 0, 'all_points'],
-                   DictToGrayscale: [['patch_1', 'patch_2']],
-                   DictStandardize: [[0.443], [0.129], ['patch_1', 'patch_2']],
-                   DictToTensor: [['patch_1', 'patch_2', 'target']]]
+  TEST_TRANSFORM: [HomographyNetPrep: [32, 128, ['image_1', 'image_2'], 0, '4_points'],
+                   DictToGrayscale: [['patch_1', 'patch_2', 'image_1']],
+                   DictStandardize: [[0.443], [0.129], ['patch_1', 'patch_2', 'image_1']],
+                   DictToTensor: [['patch_1', 'patch_2', 'image_1']]]
 
 
   # Num workers
